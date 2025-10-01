@@ -2,13 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 17.5
--- Dumped by pg_dump version 17.5
+-- Dumped from database version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4)
+-- Dumped by pg_dump version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -19,20 +18,19 @@ SET row_security = off;
 
 DROP DATABASE universe;
 --
--- Name: universe; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
 --
 
-CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'C.UTF-8';
+CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
 
 
-ALTER DATABASE universe OWNER TO postgres;
+ALTER DATABASE universe OWNER TO freecodecamp;
 
 \connect universe
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -46,12 +44,12 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: asteroid; Type: TABLE; Schema: public; Owner: postgres
+-- Name: asteroid; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.asteroid (
     asteroid_id integer NOT NULL,
-    asteroid_name character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     asteroid_composition text,
     asteroid_type character varying(100),
     asteroid_description text NOT NULL,
@@ -59,10 +57,10 @@ CREATE TABLE public.asteroid (
 );
 
 
-ALTER TABLE public.asteroid OWNER TO postgres;
+ALTER TABLE public.asteroid OWNER TO freecodecamp;
 
 --
--- Name: asteroids_asteroids_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: asteroids_asteroids_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE public.asteroid ALTER COLUMN asteroid_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -76,12 +74,12 @@ ALTER TABLE public.asteroid ALTER COLUMN asteroid_id ADD GENERATED ALWAYS AS IDE
 
 
 --
--- Name: galaxy; Type: TABLE; Schema: public; Owner: postgres
+-- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.galaxy (
     galaxy_id integer NOT NULL,
-    galaxy_name character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     galaxy_type character varying(100) NOT NULL,
     galaxy_size_ly integer,
     galaxy_age_millions numeric(7,2),
@@ -91,10 +89,10 @@ CREATE TABLE public.galaxy (
 );
 
 
-ALTER TABLE public.galaxy OWNER TO postgres;
+ALTER TABLE public.galaxy OWNER TO freecodecamp;
 
 --
--- Name: galaxy_galaxy_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: galaxy_galaxy_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE public.galaxy ALTER COLUMN galaxy_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -108,22 +106,22 @@ ALTER TABLE public.galaxy ALTER COLUMN galaxy_id ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
--- Name: moon; Type: TABLE; Schema: public; Owner: postgres
+-- Name: moon; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.moon (
     moon_id integer NOT NULL,
-    moon_name character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     moon_orbital_time_days numeric(5,2),
     moon_description text NOT NULL,
     planet_id integer
 );
 
 
-ALTER TABLE public.moon OWNER TO postgres;
+ALTER TABLE public.moon OWNER TO freecodecamp;
 
 --
--- Name: moon_moon_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: moon_moon_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE public.moon ALTER COLUMN moon_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -137,12 +135,12 @@ ALTER TABLE public.moon ALTER COLUMN moon_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: planet; Type: TABLE; Schema: public; Owner: postgres
+-- Name: planet; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.planet (
     planet_id integer NOT NULL,
-    planet_name character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     planet_orbilta_time_in_years numeric(5,2),
     planet_has_water boolean NOT NULL,
     planet_number_moons integer,
@@ -154,10 +152,10 @@ CREATE TABLE public.planet (
 );
 
 
-ALTER TABLE public.planet OWNER TO postgres;
+ALTER TABLE public.planet OWNER TO freecodecamp;
 
 --
--- Name: planet_planet_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: planet_planet_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE public.planet ALTER COLUMN planet_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -171,12 +169,12 @@ ALTER TABLE public.planet ALTER COLUMN planet_id ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
--- Name: star; Type: TABLE; Schema: public; Owner: postgres
+-- Name: star; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
 CREATE TABLE public.star (
     star_id integer NOT NULL,
-    star_name character varying(100) NOT NULL,
+    name character varying(100) NOT NULL,
     star_has_planets boolean,
     star_age_in_millions numeric(7,2),
     star_spectral_type character(1),
@@ -189,10 +187,10 @@ CREATE TABLE public.star (
 );
 
 
-ALTER TABLE public.star OWNER TO postgres;
+ALTER TABLE public.star OWNER TO freecodecamp;
 
 --
--- Name: star_star_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: star_star_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE public.star ALTER COLUMN star_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -206,7 +204,7 @@ ALTER TABLE public.star ALTER COLUMN star_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Data for Name: asteroid; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: asteroid; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.asteroid OVERRIDING SYSTEM VALUE VALUES (1, 'Ceres', 'Rock/Ice', 'Dwraf Planet', 'Most massive object of main belt', '940 km');
@@ -217,7 +215,7 @@ INSERT INTO public.asteroid OVERRIDING SYSTEM VALUE VALUES (5, 'Europa', 'Carbon
 
 
 --
--- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (1, 'Milky Way', 'Spiral', 105700, 13610.00, NULL, 0, 'Mother galaxy');
@@ -230,7 +228,7 @@ INSERT INTO public.galaxy OVERRIDING SYSTEM VALUE VALUES (7, 'Wolf–Lundmark–
 
 
 --
--- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (2, 'moon1', 1.00, 'Description', 11);
@@ -260,7 +258,7 @@ INSERT INTO public.moon OVERRIDING SYSTEM VALUE VALUES (25, 'moon24', 1.00, 'Des
 
 
 --
--- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (9, 'Mercury', 0.24, true, 0, 0.05, 2440, 0.38, NULL, 15);
@@ -286,7 +284,7 @@ INSERT INTO public.planet OVERRIDING SYSTEM VALUE VALUES (28, 'Cancri 55 e', 0.7
 
 
 --
--- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
 INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (1, 'WOH G64', false, 5.00, 'B', NULL, 800.00, 4700, 28.00, 'Is a red super-gigant star located in other gallaxy', 4);
@@ -305,50 +303,50 @@ INSERT INTO public.star OVERRIDING SYSTEM VALUE VALUES (15, 'Sun', true, NULL, N
 
 
 --
--- Name: asteroids_asteroids_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: asteroids_asteroids_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.asteroids_asteroids_id_seq', 5, true);
-
-
---
--- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 7, true);
+SELECT pg_catalog.setval('public.asteroids_asteroids_id_seq', 1, false);
 
 
 --
--- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 25, true);
-
-
---
--- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 28, true);
+SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 1, false);
 
 
 --
--- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 15, true);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
 
 
 --
--- Name: asteroid asteroid_name; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, false);
+
+
+--
+-- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.star_star_id_seq', 1, false);
+
+
+--
+-- Name: asteroid asteroid_name; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.asteroid
-    ADD CONSTRAINT asteroid_name UNIQUE (asteroid_name);
+    ADD CONSTRAINT asteroid_name UNIQUE (name);
 
 
 --
--- Name: asteroid asteroids_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: asteroid asteroids_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.asteroid
@@ -356,15 +354,15 @@ ALTER TABLE ONLY public.asteroid
 
 
 --
--- Name: galaxy galaxy_galaxy_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: galaxy galaxy_galaxy_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.galaxy
-    ADD CONSTRAINT galaxy_galaxy_name_key UNIQUE (galaxy_name);
+    ADD CONSTRAINT galaxy_galaxy_name_key UNIQUE (name);
 
 
 --
--- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.galaxy
@@ -372,15 +370,15 @@ ALTER TABLE ONLY public.galaxy
 
 
 --
--- Name: moon moon_moon_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: moon moon_moon_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.moon
-    ADD CONSTRAINT moon_moon_name_key UNIQUE (moon_name);
+    ADD CONSTRAINT moon_moon_name_key UNIQUE (name);
 
 
 --
--- Name: moon moon_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: moon moon_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.moon
@@ -388,7 +386,7 @@ ALTER TABLE ONLY public.moon
 
 
 --
--- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
@@ -396,15 +394,15 @@ ALTER TABLE ONLY public.planet
 
 
 --
--- Name: planet planet_planet_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: planet planet_planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
-    ADD CONSTRAINT planet_planet_name_key UNIQUE (planet_name);
+    ADD CONSTRAINT planet_planet_name_key UNIQUE (name);
 
 
 --
--- Name: star star_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: star star_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.star
@@ -412,15 +410,15 @@ ALTER TABLE ONLY public.star
 
 
 --
--- Name: star star_star_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: star star_star_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.star
-    ADD CONSTRAINT star_star_name_key UNIQUE (star_name);
+    ADD CONSTRAINT star_star_name_key UNIQUE (name);
 
 
 --
--- Name: moon moon_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: moon moon_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.moon
@@ -428,7 +426,7 @@ ALTER TABLE ONLY public.moon
 
 
 --
--- Name: planet planet_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: planet planet_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
@@ -436,7 +434,7 @@ ALTER TABLE ONLY public.planet
 
 
 --
--- Name: star star_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: star star_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.star
@@ -446,4 +444,5 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
+
 
